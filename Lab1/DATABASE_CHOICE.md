@@ -13,3 +13,17 @@ Azure SQL database is a managed database service offered by Azure for relational
 Can it be used as a database? What are the trade-offs?
 Yes, Azure Blob Storage can be used as a database, but only to a degree. The pro is that it's very cheap, but the cons are that it isn't queryable or transactional. 
 (https://blog.devgenius.io/azure-blob-storage-is-not-a-database-heres-the-microsoft-approved-fix-c51278ce3bf9)
+
+### Evaluate and Choose
+
+
+## Decision
+### My choice: 
+Azure CosmosDB
+### Justification & Alternatives:
+Automatically, Azure Blob Storage is eliminated as an option due to the risks of using blob storage as a database and its lack of essential features if it had to be scaled.
+Azure Table storage is also eliminated since it is designed for storing key-value pairs, which may cause issues later if queries become more complex and sending the entire JSON is inadequate.
+Given that complex querying won't be taken into consideration for retrieving logs, the main benefit of using an SQL database is nullified, and price-wise both Azure SQL database and Azure cosmos DB have free tiers. Given Cosmos DB's lower latency and its ability to horizontally scale well, this is the best option. (https://learn.microsoft.com/en-us/answers/questions/2084372/sql-vs-cosmos-database)
+
+### Cost consideration
+Given that my primary option offers a free tier, cost was not a significant factor. If the free tier is insufficient, Azure SQL Database would be better, however exceeding the maximums for requests per second and storage is unlikely given the current scenario.
