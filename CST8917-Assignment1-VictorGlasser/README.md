@@ -15,7 +15,7 @@ The paper starts by introducing serverless computing and functions as a service 
 ### Orchestraion model
 #### How do orchestrator, activity, and client functions work together? How does this differ from basic FaaS?
 
-According to Azure, orchestrator functions "how actions are executed and the order in which actions are executed" (Microsoft, 2022) and the functions that they order are activity functions. The orchestrator function ensures that each activity function is run at least once during an execution(Function Types in Azure Durable Functions, 2022). Client functions are responsible for triggering orchestrator and entity functions through their respective trigger bindings that client functions target. The difference between this and basic FaaS is that basic FaaS is not stateful. This is significant because there could be race conditions, where the program only works properly if one chain of functions is completed before another set of functions reaches a specific point.
+According to Azure, orchestrator functions determine how "actions are executed and the order in which actions are executed" (Microsoft, 2022) and the functions that they order are activity functions. The orchestrator function ensures that each activity function is run at least once during an execution(Function Types in Azure Durable Functions, 2022). Client functions are responsible for triggering orchestrator and entity functions through their respective trigger bindings that client functions target. The difference between this and basic FaaS is that basic FaaS is not stateful. This is significant because there could be race conditions, where the program only works properly if one chain of functions is completed before another set of functions reaches a specific point.
 
 
 ### State management
@@ -38,10 +38,25 @@ Orchestrators and activity functions communicate with each other through orchest
 In the fan-out/fan-in pattern, multiple functions are executted at the sam time and then a an aggregation is performed on all of the results. (Fan-Out/Fan-in Scenarios in Durable Functions - Azure, 2023). fan-out/fan-in shows us how several tasks can be completed by several different functions in a distributed way. A significant issue with a distributed approach without durable functions is that it is that, even if there is a problem that causes a function to not fully complete its task, the orchestrator notices this and creates a new activity function. This way, even if the system is distributed, one can be confident that no element of the end result is missing.
 
 ## Part 3: Critical Evaluation (400-600 words)
-Two problems that remain unsolved are the 
+I would argue that the progress over the past nine years shows that cloud providers took critisisms like those of the authors and developed genuine solutions to issues as opposed to mere work-arounds. A very significant aspect of this is the complexity of the workflows that serverless functions allow users to architect. As discussed in previous sections, durable functions have resolved several of the issues discussed in the article, such as the lack of control that architects had over the sequence of tasks and the lack of persistent storage. The lack of customizability of RAM and CPU has been resolved with time and interest in the feature. On AWS' price calculator, there are currently 483 available instances (AWS, 2024).
 
 ## References
+AWS. (2024). AWS Lambda – Pricing. Amazon Web Services, Inc. https://aws.amazon.com/lambda/pricing/
+
+Cheranga Hatangala. (2020, August). Azure Durable Function Patterns — External events. Medium; Cheranga. https://medium.com/cheranga/azure-durable-function-patterns-external-events-5e545b40f2d7
+
+Durable Orchestrations - Azure Functions. (2025, December 11). Microsoft.com. https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-orchestrations?tabs=csharp-inproc
+
+Fan-out/fan-in scenarios in Durable Functions - Azure. (2023, March 23). Microsoft.com. https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-cloud-backup?tabs=csharp
+
+Function types in Azure Durable Functions. (2022, June 17). Microsoft.com. https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-types-features-overview
+
 Hellerstein, J., Faleiro, J., Gonzalez, J., Schleier-Smith, J., Sreekanti, V., Tumanov, A., & Wu, C. (2019). Serverless Computing: One Step Forward, Two Steps Back. https://www.cidrdb.org/cidr2019/papers/p119-hellerstein-cidr19.pdf
 
+Microsoft. (2026). Event Sourcing pattern - Azure Architecture Center. Learn.microsoft.com. https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing
+
 ## AI disclosure
-I used ChatGPT ot explain the "Heterogenous Hardware Support" section on page 7
+I used ChatGPT to
+* Explain the "Heterogenous Hardware Support" section on page 7 and to 
+* Ensure that Microsoft documentation was exhaustive (ex. do orchestrators and activity functions only communicate through the orchestrator functions)
+* Generating examples from the text to discuss in the final question.
